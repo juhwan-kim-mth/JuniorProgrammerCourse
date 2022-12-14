@@ -12,18 +12,22 @@ public class SpawnObstacles : MonoBehaviour
 
     private readonly float _spawnInterval = 2;
 
+    private PlayerController _playerControllerScript;
+    
     private void Start()
     {
+        _playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
         InvokeRepeating(nameof(SpawnObstacle), _startDelay, _spawnInterval);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
     }
 
     private void SpawnObstacle()
     {
-        Instantiate(obstaclePrefab, _spawnPos, obstaclePrefab.transform.rotation);
+        if (_playerControllerScript.gameOver == false)
+            Instantiate(obstaclePrefab, _spawnPos, obstaclePrefab.transform.rotation);
     }
 }
