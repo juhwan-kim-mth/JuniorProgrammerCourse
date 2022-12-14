@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _playerRb;
     [SerializeField] private float jumpForce;
     [SerializeField] private float gravityModifier;
+    public bool gameOver;
 
     private void Start()
     {
@@ -31,6 +32,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        onGround = true;
+        switch (collision.gameObject.tag)
+        {
+            case "Ground":
+            {
+                onGround = true;
+                break;
+            }
+            case "Obstacle":
+            {
+                Debug.Log("Game Over");
+                gameOver = true;
+                break;
+            }
+        }
     }
 }
