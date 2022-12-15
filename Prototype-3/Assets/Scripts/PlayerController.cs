@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool onGround = true;
     private Rigidbody _playerRb;
     private Animator _playerAnimator;
+    public ParticleSystem explosionParticle;
+    public ParticleSystem dirtParticle;
     [SerializeField] private float jumpForce;
     [SerializeField] private float gravityModifier;
     public bool gameOver;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         _playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         onGround = false;
         _playerAnimator.SetTrigger(JumpTrig);
+        dirtParticle.Stop();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -43,6 +46,7 @@ public class PlayerController : MonoBehaviour
             case "Ground":
             {
                 onGround = true;
+                dirtParticle.Play();
                 break;
             }
             case "Obstacle":
@@ -51,6 +55,8 @@ public class PlayerController : MonoBehaviour
                 gameOver = true;
                 _playerAnimator.SetBool(DeathB, true);
                 _playerAnimator.SetInteger(DeathTypeINT, 1);
+                explosionParticle.Play();
+                dirtParticle.Stop();
                 break;
             }
         }
