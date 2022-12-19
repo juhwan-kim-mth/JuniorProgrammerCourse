@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85beb194dc3454a8886c56b639caa807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _angularSpeed: 100
 --- !u!4 &1026743543
 Transform:
   m_ObjectHideFlags: 0
